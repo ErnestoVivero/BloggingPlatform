@@ -29,7 +29,7 @@ El proyecto cuenta con una suite de pruebas automatizadas enfocada en la calidad
 
 1. Clonar el repositorio:
    ```bash
-   git clone [https://github.com/TU_USUARIO/TU_REPOSITORIO.git](https://github.com/TU_USUARIO/TU_REPOSITORIO.git)
+   git clone https://github.com/ErnestoVivero/BloggingPlatform.git
 2. Configurar la cadena de conexión en el archivo appsettings.json de la capa BloggingPlatform.API.
 3. Ejecutar las migraciones desde la raíz de la solución para crear la base de datos:
    ```bash
