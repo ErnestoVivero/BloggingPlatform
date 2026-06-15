@@ -1,0 +1,29 @@
+name: .Net CI Pipeline
+
+on:
+    pull_request:
+        branches: [main]
+    push:
+        branches: [main]
+
+jobs:
+  build-and-test:
+    name: Build & Test Execution
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Descargar el código fuente del repositorio
+    - name: Checkout Source Code
+      uses: actions/checkout@v4
+
+    # 2. Restaurar paquetes NuGet de toda la solución
+    - name: Restore Dependencies
+      run: dotnet restore
+
+    # 3. Compilar la solución en modo Release (sin ejecutar tests aún)
+    - name: Build Solution
+      run: dotnet build --configuration Release --no-restore
+
+    # 4. Ejecutar todas las pruebas unitarias (xUnit) de la solución
+    - name: Run Unit Tests
+      run: dotnet test --configuration Release --no-build --verbosity normal

@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="BloggingPlatform.API/BloggingPlatform.API.csproj" />
+  <Project Path="BloggingPlatform.Application/BloggingPlatform.Application.csproj" />
+  <Project Path="BloggingPlatform.Domain/BloggingPlatform.Domain.csproj" />
+  <Project Path="BloggingPlatform.Infrastructure/BloggingPlatform.Infrastructure.csproj" />
+  <Project Path="BloggingPlatform.Tests/BloggingPlatform.Tests.csproj" />
+</Solution>
