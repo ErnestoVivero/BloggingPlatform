@@ -105,3 +105,4 @@ C:\Users\e_vivero\source\repos\Proyectos\BloggingPlatform\BloggingPlatform.Tests
 C:\Users\e_vivero\source\repos\Proyectos\BloggingPlatform\BloggingPlatform.Tests\obj\Debug\net10.0\BloggingPlatform.Tests.pdb
 C:\Users\e_vivero\source\repos\Proyectos\BloggingPlatform\BloggingPlatform.Tests\obj\Debug\net10.0\BloggingPlatform.Tests.genruntimeconfig.cache
 C:\Users\e_vivero\source\repos\Proyectos\BloggingPlatform\BloggingPlatform.Tests\obj\Debug\net10.0\ref\BloggingPlatform.Tests.dll
+C:\Users\e_vivero\source\repos\Proyectos\BloggingPlatform\BloggingPlatform.Tests\obj\Debug\net10.0\BloggingPlatform.Tests.sourcelink.json

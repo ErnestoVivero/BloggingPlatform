@@ -68,5 +68,45 @@ namespace BloggingPlatform.Tests
             _articleRepositoryMock.Verify(repo => repo.AddAsync(It.IsAny<Article>()), Times.Never);
             _unitOfWorkMock.Verify(uow => uow.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
         }
+
+        [Fact]
+        public async Task PublishAsync_WhenArticleExists_ShouldPublishAndSaveChanges()
+        {
+            //Arrange
+            var articleId = Guid.NewGuid();
+            var authorID = Guid.NewGuid();
+            var fakeArticle = new Article("Titulo", "Contenido", authorID);
+
+            _articleRepositoryMock.Setup(repo => repo.GetByIdAsync(articleId)).ReturnsAsync(fakeArticle);
+
+            //Act
+            var result = _sut.PublishAsync(articleId);
+
+            //Assert
+            Assert.True(fakeArticle.IsPublished);
+            Assert.NotNull(fakeArticle.PublishedAt);
+
+            //Verificar comportamiento de repositorios
+            _articleRepositoryMock.Verify(art => art.Update(fakeArticle), Times.Once);
+            _unitOfWorkMock.Verify(uow => uow.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task PublishAsync_WhenArticleDoesNotExists_ShouldKeyNotFoundException()
+        {
+            //Arrange
+            var articleId = Guid.NewGuid();
+            
+            _articleRepositoryMock.Setup(repo => repo.GetByIdAsync(articleId)).ReturnsAsync((Article?)null);
+
+            //Act & Assert
+            var exception = await Assert.ThrowsAsync<KeyNotFoundException>(() => _sut.PublishAsync(articleId));
+            
+            Assert.Contains($"El artículo con ID {articleId} no existe.", exception.Message);
+
+            //Verificar que los repositorios no se actualizaron por la excepcion
+            _articleRepositoryMock.Verify(repo => repo.Update(It.IsAny<Article>()), Times.Never);
+            _unitOfWorkMock.Verify(uow => uow.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
+        }
     }
 }

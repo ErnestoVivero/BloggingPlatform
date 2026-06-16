@@ -58,10 +58,10 @@ namespace BloggingPlatform.Application.Services
                 throw new KeyNotFoundException($"El artículo con ID {id} no existe.");
             }
 
-            // Delegamos la regla de negocio a la propia entidad (Modelo Rico)
+            // Delegar la regla de negocio a la propia entidad (Modelo Rico)
             article.Publish();
 
-            // Le avisamos al repositorio que rastree este cambio
+            // Avisar al repositorio que rastree este cambio
             _articleRepository.Update(article);
 
             await _unitOfWork.SaveChangesAsync();
