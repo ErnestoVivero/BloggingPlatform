@@ -16,7 +16,7 @@ namespace BloggingPlatform.Domain.Entities
         // Requerido por EF Core
         private User() { }
 
-        public User(string username, string email)
+        public User(string? username, string? email)
         {
             if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentException("El nombre de usuario no puede estar vacío.", nameof(username));
