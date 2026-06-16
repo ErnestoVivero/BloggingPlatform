@@ -25,5 +25,22 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     # 4. Ejecutar todas las pruebas unitarias (xUnit) de la solución
-    - name: Run Unit Tests
-      run: dotnet test --configuration Release --no-build --verbosity normal
+    - name: Run Unit Tests with Coverage
+      run: | 
+        dotnet test --configuration Release --no-build --verbosity normal \
+        --collect:"Xplat Code Coverage" \
+        --results-directory ./TestResults
+    
+    # 5. Procesar archivo XML y generar un resumen en Markdown
+    - name: Generate Coverage Summary
+      uses: irongut/CodeCoverageSummary@v1.3.0
+      with: 
+        filename: TestResults/**/coverage.cobertura.xml
+        badge: true
+        fail_below_min: false # Cambia a true y define un % si quieres que el pipeline falle si baja la cobertura
+        format: markdown
+        output: both
+
+    # 7. Publicar el reporte directamente en el "Job Summary" de GitHub Actions
+    - name: Publish Coverage to Job Summary
+      run: cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY
