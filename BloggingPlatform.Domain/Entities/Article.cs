@@ -19,12 +19,12 @@ namespace BloggingPlatform.Domain.Entities
 
         private Article() { }
 
-        public Article(string title, string content, Guid authorId)
+        public Article(string? title, string? content, Guid authorId)
         {
-            if (string.IsNullOrEmpty(title))
+            if (string.IsNullOrWhiteSpace(title))
                 throw new ArgumentException("El título no puede estar vacío", nameof(title));
 
-            if (string.IsNullOrEmpty(content))
+            if (string.IsNullOrWhiteSpace(content))
                 throw new ArgumentException("El contenido no puede estar vacío", nameof(content));
 
             if(authorId == Guid.Empty)
@@ -41,7 +41,7 @@ namespace BloggingPlatform.Domain.Entities
         public void Publish()
         {
             if (IsPublished)
-                return; // Si ya está publicado, no hacemos nada
+                throw new InvalidOperationException("El artículo ya se encuentra publicado.");
 
             IsPublished = true;
             PublishedAt = DateTime.UtcNow;
