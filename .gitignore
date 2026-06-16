@@ -1,3 +1,6 @@
 .vs/
 **/bin/
 **/obj/
+[Tt]est[Rr]esults/
+coveragereport/
+code-coverage-results.md
